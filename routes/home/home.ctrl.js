@@ -1,6 +1,6 @@
 "use strict"
 
-const hello=(req, res) =>{
+const home=(req, res) =>{
   res.render("home/index");
 }
 
@@ -10,7 +10,7 @@ const login=(req, res) =>{
 
 //모듈을 밖으로 빼주기 함수의 return 같은 느낌
 module.exports ={
-  hello,
+  home,
   login,
 }
 

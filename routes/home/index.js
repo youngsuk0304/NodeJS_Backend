@@ -12,7 +12,7 @@ const ctrl = require("./home.ctrl");
 // }); 
 //위 코드에서 (req,res)=>{res.render("home/index"); 부분이 컨트롤러에 해당
 //컨트롤러 부분을 제거하고 빼줄 예정
-router.get("/",ctrl.hello);
+router.get("/",ctrl.home);
 
 router.get("/login",ctrl.login);
 
