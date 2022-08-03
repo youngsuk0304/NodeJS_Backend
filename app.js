@@ -24,22 +24,15 @@ const app = express();//변수 app안에 express() 넣어주고
 //우리가 만든 js파일을 require해서 불러오게 만드는 코드
 const home = require("./routes/home");
 
-const PORT=3000;
-
 app.set("views","./views");//set("화면 views를 만들고","그 views가 있는 폴더의 위치")
 
 //코드를 어떤 엔진으로 해석할지 지정
 //우리는 view engin으로 ejs라는것을 사용
 app.set("view engine","ejs")
 
-
 app.use("/",home);//use()는 미들웨어를 등록해주는 메서드
 
-//위의 코드로 인해 /routes/home에 있는 index.js 파일을 읽고 실행해준다.
-
-app.listen(PORT,()=>{
-  console.log("서버 가동")
-});//3000번 포트로 열어달라 
+module.exports=app;
 
 //서비스 개발을 할때는 MVC패턴을 주로 이용하나  
 //MVP, MTV .. 다양한 설계 패턴이 존재
