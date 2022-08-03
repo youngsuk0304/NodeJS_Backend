@@ -13,9 +13,15 @@ app.set("views","./src/views");//set("화면 views를 만들고","그 views가 �
 
 //코드를 어떤 엔진으로 해석할지 지정
 //우리는 view engin으로 ejs라는것을 사용
-app.set("view engine","ejs")
+app.set("view engine","ejs");
 
 app.use("/",home);//use()는 미들웨어를 등록해주는 메서드
+//login.ejs에서 login.js에 접근 할 수 있도록 처리가 필요
+//미들웨어 등록 
+app.use(express.static(`${__dirname}/src/public`));
+//${__dirname}는 현재 app.js파일이 있는 경로를 반환
+//즉, app.js가 있는 dir에서/src안에 public폴더를 정적 경로로 추가
+//ejs파일에서 src로 경로를 지정해주면 public가 root경로로 지정 
 
 module.exports=app;
 
