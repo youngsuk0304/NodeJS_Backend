@@ -7,14 +7,9 @@ const router = express.Router();
 //ctrl에서 빼준 부분 을 사용가능하게 받기.
 const ctrl = require("./home.ctrl");
 
-// router.get("/",(req,res)=>{
-//   res.render("home/index");
-// }); 
-//위 코드에서 (req,res)=>{res.render("home/index"); 부분이 컨트롤러에 해당
-//컨트롤러 부분을 제거하고 빼줄 예정
-router.get("/",ctrl.home);
-
-router.get("/login",ctrl.login);
+router.get("/",ctrl.output.home);
+router.get("/login",ctrl.output.login);
+router.post("/login",ctrl.process.login);
 
 //router를 외부파일에서 사용할 수 있도록 던져주는 부분
 module.exports = router;

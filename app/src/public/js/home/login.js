@@ -15,17 +15,18 @@ function login(){
     id : id.value,
     psword : psword.value,
   };
-  console.log(req);
-  console.log(JSON.stringify(req));
-  fetch("/login",{
+  
+  //console.log(req);
+  //console.log(JSON.stringify(req));
+
+
+  fetch("/login",{  //내가 전달 하려는 데이터의 형식을 알려줘야한다.
     method : "POST",
-    headers:{//내가 전달 하려는 데이터의 형식을 알려줘야한다.
-      "Content-Type": "application/json",//데이터 타입 명시
+    headers:{
+      "Content-Type": "application/json",  //데이터 타입 명시 "application/json"
     },
-    body : JSON.stringify(req)
+    body : JSON.stringify(req),
   });//위와 같이 설정하면 /login이라는 경로에 POST라는 메소드로 데이터르 받을 수 있는 api가 있어야 한다.
-  
-  
   //두번째 파라미터로 전달할 데이터를 보내줄 수 있다.
   //이때 데이터의 형식은 object 여야 한다
   //JSON이라는 형식으로 데이터를 전송 할예정이기 때문에 req를 JSON 형식으로 감싸주어야 한다.
