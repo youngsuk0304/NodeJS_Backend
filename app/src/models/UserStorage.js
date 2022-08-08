@@ -1,5 +1,6 @@
 "use strict";
-
+//User의 정보 저장된곳
+//getUsers를 이용하여 user의 정보를 얻을 수 있다.
 class UserStorage{
   static #users={//#표시는 public한 변수에서 private한 변수려 바꿔준다.
     id:["서영석","강성규","허정","방선주"],
@@ -17,6 +18,17 @@ class UserStorage{
       return newUsers;
     },{});
     return newUsers; 
+  }
+
+  static getUserInfo(id){
+    const users = this.#users;
+    const idx = users.id.indexOf(id);
+    const userKeys = Object.keys(users);//users의 key값만 list로 만든다. ==> [id, psword, name] 형식
+    const userInfo=userKeys.reduce((newUser,info)=>{
+      newUser[info]=users[info][idx];
+      return newUser;
+    },{});
+    return userInfo;
   }
 }
 
