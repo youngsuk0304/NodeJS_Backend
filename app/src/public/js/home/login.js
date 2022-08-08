@@ -6,7 +6,7 @@
 const id = document.querySelector("#id");//질의 선택자
 const psword = document.querySelector("#psword");//#은 태그의 id의 값 'id'를 의미
 //id = 'id'
-const loginBtn = document.querySelector("button");
+const loginBtn = document.querySelector("a");
 
 loginBtn.addEventListener("click",login);
 
