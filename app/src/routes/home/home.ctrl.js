@@ -27,6 +27,13 @@ const process={//web화면에서 id와 pw에 입력한 데이터 받아옴
 
     return res.json(response);
   },
+  register:(req,res)=>{ 
+    const user = new User(req.body);
+    const response = user.register();
+    console.log(response);
+
+    return res.json(response);
+  },
 };
 
 //모듈을 밖으로 빼주기 함수의 return 같은 느낌
