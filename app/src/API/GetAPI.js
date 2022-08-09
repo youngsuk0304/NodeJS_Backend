@@ -7,12 +7,12 @@ fetch("http://210.104.190.229:8381/member/login", {
   },
   body: JSON.stringify({
     "compSeq": 1, 
-    "id": "HI_3",
+    "id": "pang7163y@gmail.com",
     "lang": "ko_KR",
     "pw": "Zxcasd123!",
     "sns" : "O"
   }),
-}).then((response) => console.log(response));
+}).then((response) => console.log(response.json()));
 
 // fetch('http://210.104.190.229:8381/member/login')
 //   .then(res => {
