@@ -27,9 +27,9 @@ const process={//web화면에서 id와 pw에 입력한 데이터 받아옴
 
     return res.json(response);
   },
-  register:(req,res)=>{ 
+  register:async (req,res)=>{ 
     const user = new User(req.body);
-    const response = user.register();
+    const response = await user.register();
     console.log(response);
 
     return res.json(response);

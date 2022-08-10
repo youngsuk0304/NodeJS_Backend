@@ -12,7 +12,13 @@ fetch("http://210.104.190.229:8381/member/login", {
     "pw": "Zxcasd123!",
     "sns" : "O"
   }),
-}).then((response) => console.log(response.json()));
+}).then((response) => response.json())
+.then((data) => {
+  console.log('성공:', data);
+})
+.catch((error) => {
+  console.error('실패:', error);
+});
 
 // fetch('http://210.104.190.229:8381/member/login')
 //   .then(res => {
