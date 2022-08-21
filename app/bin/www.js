@@ -1,6 +1,7 @@
 "use strict"
+import {app} from "../app.js";
 
-const app = require("../app");
+//const app = require("../app");
 const PORT=3000;
 
 app.listen(PORT,()=>{
