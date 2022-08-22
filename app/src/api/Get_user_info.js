@@ -1,16 +1,18 @@
 import fetch from 'node-fetch';
+import user_id_pw from '../../app_mysql.js';
+import * as mysql from '../../app.js';
 
 var user_info={
   member_seq :null,
-  member_phone_num:null,
-  member_email:null,
-  token:null,
+  user_id : null,
+  member_name:null,
+  member_birth:null,
+  member_phone_number:null,
+  member_token:null,
 };
-
-const get_token_url="http://210.104.190.229:8381/login";
-
-function callApi(){
-
+console.log(user_id_pw.length);
+for(var i=0;i<user_id_pw.length;i++){
+  const get_token_url="http://210.104.190.229:8381/login";
   fetch(get_token_url ,{
     method : "POST",
     headers: {
@@ -18,23 +20,28 @@ function callApi(){
     },
     body:JSON.stringify({
       "compSeq": 47, 
-      "id": "dothebestmoon1016@gmail.com",
+      "id":  user_id_pw[i].user_id,
       "lang": "ko_KR",
-      "pw": "Hustar1016!",
+      "pw":  user_id_pw[i].user_pw,
       "sns" : "O"
     })
   }).then((response) => response.json())
   .then((data) => {
-      user_info.member_seq=JSON.stringify(data.profile.memberSeq);
-      user_info.member_phone_num=JSON.stringify(data.profile.phone);
-      user_info.member_email=JSON.stringify(data.profile.email);
-      user_info.token=JSON.stringify(data.token);
-      
+    user_info.member_seq = data.profile.memberSeq;
+    user_info.user_id = user_id_pw[i].user_id;
+    user_info.member_name = data.profile.name;
+    user_info.member_birth = data.profile.profileInsDate.slice(0,10);
+    user_info.member_phone_number = data.profile.phone;
+    user_info.member_token = data.token;
+    console.log(user_info);
+  //console.log(result);
+    const result =mysql.query('insert_user_info',user_info)
+
   })
   .catch((error) => {
       console.error('실패:', error);
   });
 }
-setInterval(callApi, 1000);
+
 
 export default user_info;

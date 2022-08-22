@@ -1,10 +1,10 @@
-const adminIdPw='select * from user_id_pw';
+const user_id_pw='select * from user_id_pw';
 const insert_user_bio_info = 'INSERT INTO USER_BIO_INFO set?';
 const insert_user_info = 'INSERT INTO USER_INFO set?';
 
 const update_user_bio_info = 'update USER_BIO_INFO set ? where id=?';
 export {
-    adminIdPw ,
+    user_id_pw ,
     insert_user_info,
     insert_user_bio_info ,
     update_user_bio_info,

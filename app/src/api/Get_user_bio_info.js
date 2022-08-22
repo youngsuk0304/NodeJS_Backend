@@ -1,19 +1,27 @@
 import fetch from 'node-fetch';
+import user_info from './Get_user_info.js';
+import * as mysql from '../../app.js';
 
 var user_bio_info={
-  member_diastolic_blood_pressure : null,
-  member_systolic_blood_pressure : null,
+  member_seq:null,
   member_bpm :null,
   member_stress_level :null,
-  member_stress_value :null
+  member_stress_value :null,
+  member_diastolic_blood_pressure : null,
+  member_systolic_blood_pressure : null,
+  //info_time:null,
 };
 
 const Bp_url = "http://210.104.190.229:8381/v19blood/list?";
 const Stress_url = "http://210.104.190.229:8381/v19Stress/list?";
 const Bpm_url = "http://210.104.190.229:8381/v19heart/list?";
 
+async function callApi(){
 
-function callApi(){
+  console.log("Get_user_bio_info");
+  
+  user_bio_info.member_seq=await user_info.member_seq;
+  //info_time=1660618500;
   fetch(Bp_url + new URLSearchParams({
     "memberSeq":parseFloat("2345")  ,
     "startDay": 1660618500000,
@@ -22,15 +30,13 @@ function callApi(){
   {
       headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyMzM5IiwiZXhwIjoxNjYzMzMxMDg0fQ.QOf-gLZuySGR8MygYUZ6aiEr9xpCTvGZweVaobvw5ObpeB4TYfWD5FbCT4esWKrcPnjNbC6J1ztHkQ8JKa00qw"
+          "Authorization": await user_info.member_token
       },
   }).then((response) => response.json())
   .then((data) => {
-    console.log('bp성공',data);
-    bi_info.member_diastolic_blood_pressure=JSON.stringify(data.min[0].diastolic);
-    bi_info.member_systolic_blood_pressure=JSON.stringify(data.max[0].systolic)
-    console.log("diastolic : ",bi_info.member_systolic_blood_pressure);
-    console.log("systolic : ",bi_info.member_diastolic_blood_pressure);
+    console.log('bp성공');
+    user_bio_info.member_diastolic_blood_pressure=data.min[0].diastolic;
+    user_bio_info.member_systolic_blood_pressure=data.max[0].systolic;
   })
   .catch((error) => {
     console.error('실패:', error);
@@ -45,13 +51,12 @@ function callApi(){
   {
       headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyMzQ1IiwiZXhwIjoxNjYzNTIzNzMyfQ.4GbsyFBmJdc69LCwGsklBWn-JY3C_Cu19ec7NHcGgbtGLtUVWdGQAHWCAi7bzkuW7XJsZbeiq-IKAf8bydzgjg"
+          "Authorization": await user_info.member_token
       },
   }).then((response) => response.json())
   .then((data) => {
     console.log('bpm 성공');
-    bi_info.member_bpm=JSON.stringify(data.list[0].bpm);
-    console.log("bpm : ",bi_info.member_bpm);
+    user_bio_info.member_bpm=data.list[0].bpm;
   })
   .catch((error) => {
     console.error('실패:', error);
@@ -70,16 +75,18 @@ function callApi(){
         },
   }).then((response) => response.json())
   .then((data) => {
-    console.log('stress 성공:',data);
-    bi_info.member_stress_level=JSON.stringify(data.list[0].stressLevel);
-    bi_info.member_stress_value=JSON.stringify(data.list[0].stressValue);
-    console.log("stress_level : ",bi_info.member_stress_level);
-    console.log("stress_value : ",bi_info.member_stress_value);
+    console.log('stress 성공:');
+    user_bio_info.member_stress_level=data.list[0].stressLevel;
+    user_bio_info.member_stress_value=data.list[0].stressValue;
   })
   .catch((error) => {
     console.error('실패:', error);
   });
+  console.log(user_bio_info);
+
+  mysql.query('insert_user_bio_info',user_bio_info);
 }
-setInterval(callApi, 1000);
+
+setInterval(callApi, 3000);
 
 export default user_bio_info;

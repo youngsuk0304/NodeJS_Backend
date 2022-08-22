@@ -15,6 +15,11 @@ router.get("/",output.home);
 router.get("/login",output.login);
 router.get("/register",output.register);//회원가입
 
+//db부분
+router.get("/adminIdPw", );
+router.post("insert_user_info",);
+router.post("/insert_user_bio_info",);
+
 router.post("/login",process.login);//로그인 버튼을 누르면 post로 로그인 경로 요청하며 ctrl에 process에있는 login
 router.post("/register",process.register);//회원가입
 
