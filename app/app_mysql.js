@@ -19,7 +19,7 @@ app.listen(3000,()=>{
     console.log("Server start.port 3000");
 });
 
-const user_id_pw = await mysql.query('user_id_pw');
+const user_id_pw = mysql.query('user_id_pw');
 console.log(user_id_pw);
 
 app.put('/update', (req,res)=>{

@@ -10,7 +10,6 @@ import * as sql from './src/models/sql.js';
 //express 모듈을 이용한 서버 열기
 //const express = require("express");//require이라는 명령어로 express라는 모듈을 다운
 const app = express();//변수 app안에 express() 넣어주고 
-
 //mysql
 // const mysql=require('mysql');
 // const sql=require('./src/models/sql.js');

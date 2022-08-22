@@ -15,7 +15,7 @@ var user_bio_info={
 const Bp_url = "http://210.104.190.229:8381/v19blood/list?";
 const Stress_url = "http://210.104.190.229:8381/v19Stress/list?";
 const Bpm_url = "http://210.104.190.229:8381/v19heart/list?";
-
+const nowtime =Date.now()-2086400000;
 async function callApi(){
 
   console.log("Get_user_bio_info");
@@ -24,8 +24,8 @@ async function callApi(){
   //info_time=1660618500;
   fetch(Bp_url + new URLSearchParams({
     "memberSeq":parseFloat("2345")  ,
-    "startDay": 1660618500000,
-      "endDay": 1660618800000
+    "startDay": nowtime,
+      "endDay": nowtime+1000000000//1660618800000
   }),
   {
       headers: {
@@ -45,8 +45,8 @@ async function callApi(){
 
   fetch(Bpm_url + new URLSearchParams({
     //"memberSeq": 2345,
-    "startDay": 1660610500000,
-    "endDay": 1660618800000
+    "startDay": nowtime,
+    "endDay": nowtime+100000000000
   }),
   {
       headers: {

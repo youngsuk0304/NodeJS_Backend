@@ -10,9 +10,15 @@ var user_info={
   member_phone_number:null,
   member_token:null,
 };
+
 console.log(user_id_pw.length);
-for(var i=0;i<user_id_pw.length;i++){
-  const get_token_url="http://210.104.190.229:8381/login";
+const get_token_url="http://210.104.190.229:8381/login";
+var i=0;
+//for(let i=user_id_pw.length-1 ; i >=0  ; i--){ 
+  console.log("i : ",i);
+
+  console.log("user_id : ",user_id_pw[i].user_id);
+
   fetch(get_token_url ,{
     method : "POST",
     headers: {
@@ -27,6 +33,9 @@ for(var i=0;i<user_id_pw.length;i++){
     })
   }).then((response) => response.json())
   .then((data) => {
+    console.log("i : ",i);
+    console.log("user_id : ",user_id_pw[i].user_id);
+
     user_info.member_seq = data.profile.memberSeq;
     user_info.user_id = user_id_pw[i].user_id;
     user_info.member_name = data.profile.name;
@@ -36,12 +45,11 @@ for(var i=0;i<user_id_pw.length;i++){
     console.log(user_info);
   //console.log(result);
     const result =mysql.query('insert_user_info',user_info)
-
   })
   .catch((error) => {
       console.error('실패:', error);
   });
-}
+//}
 
 
 export default user_info;
